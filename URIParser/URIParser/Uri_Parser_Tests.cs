@@ -8,15 +8,15 @@ namespace URIParser
     [TestClass]
     public class Uri_Parser_Tests
     {
-        static Uri URI1 = new Uri("ftp://username:password@hostname/");
-        static Uri URI2 = new Uri("http://www.ietf.org/rfc/rfc2396.txt");
-        static Uri URI3 = new Uri("ldap://[2001:db8::7]/c=GB?objectClass?one");
-        static Uri URI4 = new Uri("mailto:John.Doe@example.com");
-        static Uri URI5 = new Uri("tel:+1-816-555-1212");
-        static Uri URI6 = new Uri("telnet://192.0.2.16:80/");
-        static Uri URI7 = new Uri("news:comp.infosystems.www.servers.unix");
-        static Uri URI8 = new Uri("https://example.com/path/resource.txt#fragment");
-        static Uri URI9 = new Uri("http://matt:secret@www.chilkatsoft.com:8080/somepath.asp?test=123&size=2");
+        static string URI1 = "ftp://username:password@hostname/";
+        static string URI2 = "http://www.ietf.org/rfc/rfc2396.txt";
+        static string URI3 = "ldap://[2001:db8::7]/c=GB?objectClass?one";
+        static string URI4 = "mailto:John.Doe@example.com";
+        static string URI5 = "tel:+1-816-555-1212";
+        static string URI6 = "telnet://192.0.2.16:80/";
+        static string URI7 = "news:comp.infosystems.www.servers.unix";
+        static string URI8 = "https://example.com/path/resource.txt#fragment";
+        static string URI9 = "http://matt:secret@www.chilkatsoft.com:8080/somepath.asp?test=123&size=2";
 
 
         Uri_Parser parser1 = new Uri_Parser(URI1);

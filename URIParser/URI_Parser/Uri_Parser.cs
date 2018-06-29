@@ -18,7 +18,7 @@ namespace URI_Parser
         public string query { get; set; }
         public string fragment { get; set; }
 
-        public Uri_Parser(Uri uri)
+        public Uri_Parser(string uri)
         {
 
         }
