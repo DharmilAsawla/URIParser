@@ -1,5 +1,12 @@
 ﻿using System;
 
+/*
+ * Takes a String or an URI as a constructor argument
+ * 
+ * Gets the port,path,user,password,query and fragment components of a URI
+ * 
+ * */
+
 
 namespace URI_Parser
 {
@@ -11,14 +18,25 @@ namespace URI_Parser
         // if argument is a string
         public Uri_Parser(string uri)
         {
-            _uri = new Uri(uri);
 
-        }
+            //cathc if an invalid URI is supplied
+            try
+            {
+                if (IsValidURI(uri))
+                {
+                    _uri = new Uri(uri);
+                }
+            }
+            catch (UriFormatException ex)
+            {
 
-        //if argument is an URI
-        public Uri_Parser(Uri uri)
+                throw new UriFormatException("Invalid URI supplied",ex);
+            }
+        }              
+
+        public Boolean IsValidURI(String uri)
         {
-            _uri = uri;
+            return Uri.IsWellFormedUriString(uri,UriKind.RelativeOrAbsolute);
         }
 
         public string Fragment()
