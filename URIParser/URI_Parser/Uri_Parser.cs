@@ -45,8 +45,6 @@ namespace URI_Parser
                 var items = _uri.UserInfo.Split(new[] { ':' });
                 return items.Length > 0 ? items[0] : string.Empty;
             }
-
-
         }
 
         public string Password()
@@ -62,17 +60,10 @@ namespace URI_Parser
         {
             return _uri.AbsolutePath;
         }
-
-
-        /* TODO 
-         * 
-         * Check of port is default first
-         * 
-         * */
-
+               
         public int? Port()
         {
-            if (_uri.Port == -1)
+            if (_uri.Port == -1) //if there is no default port this return -1
             {
                 return null;
             }
