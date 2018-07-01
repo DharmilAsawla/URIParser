@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using URI_Parser;
 
@@ -8,6 +8,9 @@ namespace URIParser
     [TestClass]
     public class Uri_Parser_Tests
     {
+
+        //test example URI's taken from https://tools.ietf.org/html/rfc3986#section-1.1.2
+
         static string URI1 = "ftp://username:password@hostname/";
         static string URI2 = "http://www.ietf.org/rfc/rfc2396.txt";
         static string URI3 = "ldap://[2001:db8::7]/c=GB?objectClass?one";
@@ -29,102 +32,110 @@ namespace URIParser
         Uri_Parser parser8 = new Uri_Parser(URI8);
         Uri_Parser parser9 = new Uri_Parser(URI9);
 
+
+
         [TestMethod]
         public void Scheme()
         {
-            Assert.AreEqual("ftp", parser1.scheme);
-            Assert.AreEqual("http", parser2.scheme);
-            Assert.AreEqual("ldap", parser3.scheme);
-            Assert.AreEqual("mailto", parser4.scheme);
-            Assert.AreEqual("tel", parser5.scheme);
-            Assert.AreEqual("telnet", parser6.scheme);
-            Assert.AreEqual("news", parser7.scheme);
-            Assert.AreEqual("https", parser8.scheme);
-            Assert.AreEqual("http", parser9.scheme);
+
+            Assert.AreEqual("ftp", parser1.Scheme());
+            Assert.AreEqual("http", parser2.Scheme());
+            Assert.AreEqual("ldap", parser3.Scheme());
+            Assert.AreEqual("mailto", parser4.Scheme());
+            Assert.AreEqual("tel", parser5.Scheme());
+            Assert.AreEqual("telnet", parser6.Scheme());
+            Assert.AreEqual("news", parser7.Scheme());
+            Assert.AreEqual("https", parser8.Scheme());
+            Assert.AreEqual("http", parser9.Scheme());
         }
 
         [TestMethod]
         public void User()
         {
-            Assert.AreEqual("username", parser1.user);
-            Assert.AreEqual("matt", parser9.user);
+            Assert.AreEqual("username", parser1.User());
+            Assert.AreEqual("matt", parser9.User());
         }
 
         [TestMethod]
         public void Password()
         {
-            Assert.AreEqual("password", parser1.password);
-            Assert.AreEqual("secret", parser9.password);
+
+
+            Assert.AreEqual("password", parser1.Password());
+            Assert.AreEqual("secret", parser9.Password());
         }
 
         [TestMethod]
         public void Host()
         {
-            Assert.AreEqual("ftp", parser1.host);
-            Assert.AreEqual("http", parser2.host);
-            Assert.AreEqual("ldap", parser3.host);
-            Assert.AreEqual("mailto", parser4.host);
-            Assert.AreEqual("tel", parser5.host);
-            Assert.AreEqual("telnet", parser6.host);
-            Assert.AreEqual("news", parser7.host);
-            Assert.AreEqual("https", parser8.host);
-            Assert.AreEqual("http", parser9.host);
+            Assert.AreEqual("hostname", parser1.Host());
+            Assert.AreEqual("www.ietf.org", parser2.Host());
+            Assert.AreEqual("[2001:db8::7]", parser3.Host());
+            Assert.AreEqual("example.com", parser4.Host());
+            Assert.AreEqual("", parser5.Host());
+            Assert.AreEqual("192.0.2.16", parser6.Host());
+            Assert.AreEqual("", parser7.Host());
+            Assert.AreEqual("example.com", parser8.Host());
+            Assert.AreEqual("www.chilkatsoft.com", parser9.Host());
         }
 
+
+
+        //https://www.webopedia.com/quick_ref/portnumbers.asp (List of known port numbers)
         [TestMethod]
         public void Port()
         {
-            Assert.AreEqual("ftp", parser1.port);
-            Assert.AreEqual("http", parser2.port);
-            Assert.AreEqual("ldap", parser3.port);
-            Assert.AreEqual("mailto", parser4.port);
-            Assert.AreEqual("tel", parser5.port);
-            Assert.AreEqual("telnet", parser6.port);
-            Assert.AreEqual("news", parser7.port);
-            Assert.AreEqual("https", parser8.port);
-            Assert.AreEqual("http", parser9.port); ;
+            Assert.AreEqual(21, parser1.Port());
+            Assert.AreEqual(80, parser2.Port());
+            Assert.AreEqual(389, parser3.Port());
+            Assert.AreEqual(25, parser4.Port());
+            Assert.AreEqual(null, parser5.Port());
+            Assert.AreEqual(80, parser6.Port());
+            Assert.AreEqual(null, parser7.Port());
+            Assert.AreEqual(443, parser8.Port());
+            Assert.AreEqual(8080, parser9.Port());
         }
 
         [TestMethod]
         public void Path()
         {
-            Assert.AreEqual("ftp", parser1.path);
-            Assert.AreEqual("http", parser2.path);
-            Assert.AreEqual("ldap", parser3.path);
-            Assert.AreEqual("mailto", parser4.path);
-            Assert.AreEqual("tel", parser5.path);
-            Assert.AreEqual("telnet", parser6.path);
-            Assert.AreEqual("news", parser7.path);
-            Assert.AreEqual("https", parser8.path);
-            Assert.AreEqual("http", parser9.path);
+            Assert.AreEqual("/", parser1.Path());
+            Assert.AreEqual("/rfc/rfc2396.txt", parser2.Path());
+            Assert.AreEqual("/c=GB", parser3.Path());
+            Assert.AreEqual("", parser4.Path());
+            Assert.AreEqual("+1-816-555-1212", parser5.Path());
+            Assert.AreEqual("/", parser6.Path());
+            Assert.AreEqual("comp.infosystems.www.servers.unix", parser7.Path());
+            Assert.AreEqual("/path/resource.txt", parser8.Path());
+            Assert.AreEqual("/somepath.asp", parser9.Path());
         }
 
         [TestMethod]
         public void Query()
         {
-            Assert.AreEqual("ftp", parser1.query);
-            Assert.AreEqual("http", parser2.query);
-            Assert.AreEqual("ldap", parser3.query);
-            Assert.AreEqual("mailto", parser4.query);
-            Assert.AreEqual("tel", parser5.query);
-            Assert.AreEqual("telnet", parser6.query);
-            Assert.AreEqual("news", parser7.query);
-            Assert.AreEqual("https", parser8.query);
-            Assert.AreEqual("http", parser9.query);
+            Assert.AreEqual("", parser1.Query());
+            Assert.AreEqual("", parser2.Query());
+            Assert.AreEqual("?objectClass?one", parser3.Query());
+            Assert.AreEqual("", parser4.Query());
+            Assert.AreEqual("", parser5.Query());
+            Assert.AreEqual("", parser6.Query());
+            Assert.AreEqual("", parser7.Query());
+            Assert.AreEqual("", parser8.Query());
+            Assert.AreEqual("?test=123&size=2", parser9.Query());
         }
 
         [TestMethod]
         public void Fragment()
         {
-            Assert.AreEqual("ftp", parser1.fragment);
-            Assert.AreEqual("http", parser2.fragment);
-            Assert.AreEqual("ldap", parser3.fragment);
-            Assert.AreEqual("mailto", parser4.fragment);
-            Assert.AreEqual("tel", parser5.fragment);
-            Assert.AreEqual("telnet", parser6.fragment);
-            Assert.AreEqual("news", parser7.fragment);
-            Assert.AreEqual("https", parser8.fragment);
-            Assert.AreEqual("http", parser9.fragment);
+            Assert.AreEqual("", parser1.Fragment());
+            Assert.AreEqual("", parser2.Fragment());
+            Assert.AreEqual("", parser3.Fragment());
+            Assert.AreEqual("", parser4.Fragment());
+            Assert.AreEqual("", parser5.Fragment());
+            Assert.AreEqual("", parser6.Fragment());
+            Assert.AreEqual("", parser7.Fragment());
+            Assert.AreEqual("#fragment", parser8.Fragment());
+            Assert.AreEqual("", parser9.Fragment());
         }
 
 
